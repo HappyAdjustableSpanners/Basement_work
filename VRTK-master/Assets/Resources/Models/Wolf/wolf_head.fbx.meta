@@ -1,0 +1,256 @@
+fileFormatVersion: 2
+guid: 290c692ebb97d7b448a166fae3d49987
+timeCreated: 1497096373
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature.001
+    100004: back.lower.leg.L
+    100006: back.lower.leg.L 1
+    100008: back.lower.leg.L_end
+    100010: back.lower.leg.L_end 1
+    100012: back.lower.leg.R
+    100014: back.lower.leg.R 1
+    100016: back.lower.leg.R_end
+    100018: back.lower.leg.R_end 1
+    100020: back.upper.foot.L
+    100022: back.upper.foot.L 1
+    100024: back.upper.foot.L_end
+    100026: back.upper.foot.L_end 1
+    100028: back.upper.foot.R
+    100030: back.upper.foot.R 1
+    100032: back.upper.foot.R_end
+    100034: back.upper.foot.R_end 1
+    100036: back.upper.leg.L
+    100038: back.upper.leg.L 1
+    100040: back.upper.leg.R
+    100042: back.upper.leg.R 1
+    100044: Body
+    100046: Body 1
+    100048: Bone.005
+    100050: Bone.005 1
+    100052: Bone.005_end
+    100054: Bone.005_end 1
+    100056: Camera
+    100058: Cylinder
+    100060: Cylinder.001
+    100062: Cylinder.002
+    100064: Cylinder.003
+    100066: Cylinder.004
+    100068: Cylinder.005
+    100070: Cylinder.006
+    100072: Cylinder.007
+    100074: front.lower.leg.L
+    100076: front.lower.leg.L 1
+    100078: front.lower.leg.L_end
+    100080: front.lower.leg.L_end 1
+    100082: front.lower.leg.R
+    100084: front.lower.leg.R 1
+    100086: front.lower.leg.R_end
+    100088: front.lower.leg.R_end 1
+    100090: front.upper.foot.L
+    100092: front.upper.foot.L 1
+    100094: front.upper.foot.L_end
+    100096: front.upper.foot.L_end 1
+    100098: front.upper.foot.R
+    100100: front.upper.foot.R 1
+    100102: front.upper.foot.R_end
+    100104: front.upper.foot.R_end 1
+    100106: front.upper.leg.L
+    100108: front.upper.leg.L 1
+    100110: front.upper.leg.R
+    100112: front.upper.leg.R 1
+    100114: Head
+    100116: Head 1
+    100118: Head_end
+    100120: Head_end 1
+    100122: Lamp
+    100124: Plane
+    100126: Root
+    100128: Root 1
+    100130: Spine1
+    100132: Spine1 1
+    100134: Spine2
+    100136: Spine2 1
+    100138: Spine3
+    100140: Spine3 1
+    100142: Spine4
+    100144: Spine4 1
+    100146: //RootNode
+    400000: Armature
+    400002: Armature.001
+    400004: back.lower.leg.L
+    400006: back.lower.leg.L 1
+    400008: back.lower.leg.L_end
+    400010: back.lower.leg.L_end 1
+    400012: back.lower.leg.R
+    400014: back.lower.leg.R 1
+    400016: back.lower.leg.R_end
+    400018: back.lower.leg.R_end 1
+    400020: back.upper.foot.L
+    400022: back.upper.foot.L 1
+    400024: back.upper.foot.L_end
+    400026: back.upper.foot.L_end 1
+    400028: back.upper.foot.R
+    400030: back.upper.foot.R 1
+    400032: back.upper.foot.R_end
+    400034: back.upper.foot.R_end 1
+    400036: back.upper.leg.L
+    400038: back.upper.leg.L 1
+    400040: back.upper.leg.R
+    400042: back.upper.leg.R 1
+    400044: Body
+    400046: Body 1
+    400048: Bone.005
+    400050: Bone.005 1
+    400052: Bone.005_end
+    400054: Bone.005_end 1
+    400056: Camera
+    400058: Cylinder
+    400060: Cylinder.001
+    400062: Cylinder.002
+    400064: Cylinder.003
+    400066: Cylinder.004
+    400068: Cylinder.005
+    400070: Cylinder.006
+    400072: Cylinder.007
+    400074: front.lower.leg.L
+    400076: front.lower.leg.L 1
+    400078: front.lower.leg.L_end
+    400080: front.lower.leg.L_end 1
+    400082: front.lower.leg.R
+    400084: front.lower.leg.R 1
+    400086: front.lower.leg.R_end
+    400088: front.lower.leg.R_end 1
+    400090: front.upper.foot.L
+    400092: front.upper.foot.L 1
+    400094: front.upper.foot.L_end
+    400096: front.upper.foot.L_end 1
+    400098: front.upper.foot.R
+    400100: front.upper.foot.R 1
+    400102: front.upper.foot.R_end
+    400104: front.upper.foot.R_end 1
+    400106: front.upper.leg.L
+    400108: front.upper.leg.L 1
+    400110: front.upper.leg.R
+    400112: front.upper.leg.R 1
+    400114: Head
+    400116: Head 1
+    400118: Head_end
+    400120: Head_end 1
+    400122: Lamp
+    400124: Plane
+    400126: Root
+    400128: Root 1
+    400130: Spine1
+    400132: Spine1 1
+    400134: Spine2
+    400136: Spine2 1
+    400138: Spine3
+    400140: Spine3 1
+    400142: Spine4
+    400144: Spine4 1
+    400146: //RootNode
+    2300000: Plane
+    2300002: //RootNode
+    3300000: Plane
+    3300002: //RootNode
+    4300000: Plane
+    4300002: Cylinder
+    4300004: Cylinder.007
+    4300006: Cylinder.006
+    4300008: Cylinder.005
+    4300010: Cylinder.004
+    4300012: Cylinder.003
+    4300014: Cylinder.002
+    4300016: Cylinder.001
+    7400000: Walk
+    7400002: Armature|Action
+    7400004: Armature|Action.001
+    7400006: Armature|Walk
+    7400008: Armature|Walk.001
+    7400010: Armature.001|Action
+    7400012: Armature.001|Action.001
+    7400014: Armature.001|Walk
+    7400016: Armature.001|Walk.001
+    9500000: //RootNode
+    13700000: Cylinder
+    13700002: Cylinder.001
+    13700004: Cylinder.002
+    13700006: Cylinder.003
+    13700008: Cylinder.004
+    13700010: Cylinder.005
+    13700012: Cylinder.006
+    13700014: Cylinder.007
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
