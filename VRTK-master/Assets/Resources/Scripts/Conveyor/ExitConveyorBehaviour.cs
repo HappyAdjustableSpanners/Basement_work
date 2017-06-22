@@ -19,12 +19,12 @@ public class ExitConveyorBehaviour : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         //Only care about toys
-        if (col.CompareTag("Toy"))
+        if (col.tag.Contains("Toy"))
         {
             //If we are the parent obj check if we are complete
             if (col.GetComponent<SnappableParent>())
             {
-                if (col.GetComponent<SnappableParent>().complete)
+                if (col.GetComponent<SnappableParent>().isComplete())
                 {
                     gameController.CompleteItemExitConveyor(col.gameObject);
                 }

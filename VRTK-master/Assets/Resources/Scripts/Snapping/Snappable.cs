@@ -9,29 +9,66 @@ public class Snappable : MonoBehaviour
     /// <summary>
     /// Detects collision with another snappable object, and snaps them together, combining their meshes
     /// </summary>
-    public bool snapped;
+    public bool parent;
+    private SpawnParticleSystem spawnPS;
+    public Vector3 forward = Vector3.forward;
+    public string objId;
+
+    void Start()
+    {
+        spawnPS = GetComponent<SpawnParticleSystem>();
+        objId = transform.name;
+    }
 
     //Snap edge has detected collision
-    public void OnCollision(GameObject objectToSnap)
+    public void OnCollision(GameObject parent, GameObject child, Transform snapPosition)
     {
-        //Get the snap position for this object
-        Transform snapPosition = transform.Find(objectToSnap.name + "_snapPos");
-
-        //Set parent of objectToSnap to this object
-        objectToSnap.transform.SetParent(transform, true);
+        //Set parent of child to this object
+        child.transform.SetParent(parent.transform, true);
 
         //Destroy the rigidbody so it is not effected by physics (shouldn't have parent and child both with their own rigidbodies..)
-        Destroy(objectToSnap.GetComponent<Rigidbody>());
+        Destroy(child.GetComponent<Rigidbody>());
 
         //The VRTK_InteractableObject script sets its parent back to the previous parent (null) when we release the object. 
         //We want it to stay parented to the parent snappable object, so we set the previous parent manually here (bit of a bodge workaround..)
-        objectToSnap.GetComponent<VRTK.VRTK_InteractableObject>().setPreviousParent(transform);
+        child.GetComponent<VRTK.VRTK_InteractableObject>().setPreviousParent(parent.transform);
 
-        //Set the local position to the snapPosition
-        objectToSnap.transform.localPosition = snapPosition.localPosition;
-        objectToSnap.transform.localRotation = snapPosition.localRotation;
 
-        //Set snapped to true
-        snapped = true;
+        //Check if we are a parent, if we are it means there are snap positions available
+        if (snapPosition)
+        {
+            if (GetComponent<SnappableParent>() != null)
+            {
+                //Transform snapPosition = transform.Find(child.name + "_snapPos");
+
+                //Set the local position to the snapPosition             
+                child.transform.localPosition = snapPosition.localPosition;
+                child.transform.localRotation = snapPosition.localRotation;
+                spawnPS.Spawn(Color.green);
+                GetComponent<SnappableParent>().AddPart(child);              
+
+                //Check if toy is complete
+                if (GetComponent<SnappableParent>().isComplete())
+                {
+                    spawnPS.Spawn(Color.yellow);
+                }
+            }
+        }
+        else
+            spawnPS.Spawn(Color.red);
+    }
+
+    private void SnapPosition(Vector3 forward, GameObject child)
+    {
+        if (forward == Vector3.forward || forward == -Vector3.forward)
+        {
+            child.transform.localPosition = new Vector3(0f, 0f, child.transform.localPosition.z);
+            //child.transform.localRotation = Quaternion.Euler(child.transform.localRotation.x, child.transform.localRotation.y, 0f);
+        }
+        else if (forward == Vector3.up || forward == -Vector3.up)
+        {
+            child.transform.localPosition = new Vector3(0f, child.transform.localPosition.y, 0f);
+            //child.transform.localRotation = Quaternion.Euler(child.transform.localRotation.x, 0f, child.transform.localRotation.z);
+        }
     }
 }

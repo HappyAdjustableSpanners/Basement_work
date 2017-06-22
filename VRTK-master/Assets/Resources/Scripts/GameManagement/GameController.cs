@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
 
     //Arrays of toy game objects based on how many snaps they require to complete
     public GameObject[] twoSnapToys, threeSnapToys, fourSnapToys, fiveSnapToys;
@@ -31,42 +32,69 @@ public class GameController : MonoBehaviour {
     public TextMesh difficultyText;
     public TextMesh spawnRateText;
 
+    public bool enabled = true;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start()
+    {
         spawnPos = transform.Find("Spawner").transform.position;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        //Increment game timer
-        gameTimer += Time.deltaTime % 60;
-        spawnTimer += Time.deltaTime % 60;
+    }
 
-        //Calculate the difficulty based on the game timer
-        CalculateDifficulty();
+    // Update is called once per frame
+    void Update()
+    {
 
-        //After the current spawn delay, spawn an item
-        if (spawnTimer > spawnDelay)
+        if (enabled)
         {
-            //Choose random 2 snap toy
-            GameObject toyToSpawn = twoSnapToys[Random.Range(0, twoSnapToys.Length - 1)];
+            //Increment game timer
+            gameTimer += Time.deltaTime % 60;
+            spawnTimer += Time.deltaTime % 60;
 
-            //Spawn the object and then for each child remove parent
-            for(int i = 0; i < toyToSpawn.transform.childCount; i++)
+            //Calculate the difficulty based on the game timer
+            CalculateDifficulty();
+
+            //After the current spawn delay, spawn an item
+            if (spawnTimer > spawnDelay)
             {
-                GameObject toy = Instantiate(toyToSpawn.transform.GetChild(i), spawnPos, Quaternion.identity).gameObject;
-                toy.name = toyToSpawn.transform.GetChild(i).name;
-                toy.tag = "Toy";
+                GameObject toyToSpawn = null;
+                //If easy difficulty, spawn only 2-snap toys
+                if (currentDifficulty == CurrentDifficulty.VeryEasy)
+                {
+                    //Choose random 2 snap toy
+                    toyToSpawn = twoSnapToys[Random.Range(0, twoSnapToys.Length)];
+                }
+                else if (currentDifficulty == CurrentDifficulty.Easy)
+                {
+                    //Choose either 2-snap or 3-snap
+                    int random = Random.Range(0, 2);
+
+                    if (random == 0)
+                    {
+                        //spawn 2-snap toy
+                        toyToSpawn = twoSnapToys[Random.Range(0, twoSnapToys.Length)];
+                    }
+                    else if (random == 1)
+                    {
+                        //spawn 3-snap toy
+                        toyToSpawn = threeSnapToys[Random.Range(0, threeSnapToys.Length)];
+                    }
+                }
+                if (toyToSpawn != null)
+                {
+                    //Spawn the object and then for each child remove parent
+                    for (int i = 0; i < toyToSpawn.transform.childCount; i++)
+                    {
+                        GameObject toy = Instantiate(toyToSpawn.transform.GetChild(i), spawnPos, Quaternion.identity).gameObject;
+                        toy.name = toyToSpawn.transform.GetChild(i).name;
+                    }
+                }
+
+                //Reset the spawn timer
+                spawnTimer = 0f;
             }
-
-            //Reset the spawn timer
-            spawnTimer = 0f;
         }
-        
-
-
-	}
+    }
 
     public void CompleteItemExitConveyor(GameObject obj)
     {
