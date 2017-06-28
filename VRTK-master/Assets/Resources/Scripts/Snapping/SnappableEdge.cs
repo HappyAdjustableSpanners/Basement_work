@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SnappableEdge : MonoBehaviour {
 
-    private Snappable snapBehaviour;
     public bool snapped = false;
+    public GameObject pair;
+    private bool isCorrectPart = false;
 
     void OnTriggerEnter(Collider col)
     {
@@ -14,6 +15,20 @@ public class SnappableEdge : MonoBehaviour {
             //Check if being grabbed
             if(transform.parent.GetComponent<VRTK.VRTK_InteractableObject>().IsGrabbed() || col.transform.parent.GetComponent<VRTK.VRTK_InteractableObject>().IsGrabbed())
             {
+                if (!snapped && !col.GetComponent<SnappableEdge>().snapped)
+                {
+                    if(pair.name.Equals(col.transform.parent.name))
+                    {
+                        isCorrectPart = true;
+                    }
+                    transform.parent.GetComponent<Snappable>().SnapFixedJoint(col.transform.parent.gameObject, col.gameObject, isCorrectPart );
+                    snapped = true;
+                    col.GetComponent<SnappableEdge>().snapped = true;
+                }
+                /*transform.parent.GetComponent<Snappable>().OnCollision(col.gameObject);
+                GetComponent<BoxCollider>().isTrigger = false;
+                col.GetComponent<BoxCollider>().isTrigger = false;
+
                 if (!snapped && !col.GetComponent<SnappableEdge>().snapped)
                 {
                     Transform snapPos;
@@ -46,7 +61,7 @@ public class SnappableEdge : MonoBehaviour {
                     //Remove triggers to improve performance
                     GetComponent<BoxCollider>().isTrigger = false;
                     col.GetComponent<BoxCollider>().isTrigger = false;
-                }
+                }*/
             }
         }
     }

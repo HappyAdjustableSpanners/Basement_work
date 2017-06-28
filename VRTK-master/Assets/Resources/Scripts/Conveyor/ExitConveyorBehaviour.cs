@@ -3,36 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ExitConveyorBehaviour : MonoBehaviour {
-
-    private GameController gameController;
-
-	// Use this for initialization
-	void Start () {
-        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+  
+    // Use this for initialization
+    void Start () {
 	}
 
     void OnTriggerEnter(Collider col)
     {
         //Only care about toys
-        if (col.tag.Contains("Toy"))
+        if (col.tag == "Toy")
         {
-            //If we are the parent obj check if we are complete
-            if (col.GetComponent<SnappableParent>())
+            if (IsToyComplete(col.gameObject))
             {
-                if (col.GetComponent<SnappableParent>().isComplete())
-                {
-                    gameController.CompleteItemExitConveyor(col.gameObject);
-                }
-                else
-                    gameController.IncompleteItemExitConveyor(col.gameObject);
+                EventManager.OnCompleteItemExitedConveyor(col.gameObject);
             }
             else
-                gameController.IncompleteItemExitConveyor(col.gameObject);
+                EventManager.OnIncompleteItemExitedConveyor(col.gameObject);
         }
+    }       
+
+    private bool IsToyComplete(GameObject toy)
+    {
+        //If we are the parent obj check if we are complete
+        if (toy.transform.root.GetComponent<PartCounter>().IsComplete())
+        {
+            return true;
+        }
+        else
+            return false;
     }
 }
+

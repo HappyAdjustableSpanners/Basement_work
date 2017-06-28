@@ -9,20 +9,20 @@ public class Snappable : MonoBehaviour
     /// <summary>
     /// Detects collision with another snappable object, and snaps them together, combining their meshes
     /// </summary>
-    public bool parent;
     private SpawnParticleSystem spawnPS;
-    public Vector3 forward = Vector3.forward;
-    public string objId;
+
+    //public Vector3 forward = Vector3.forward;
 
     void Start()
     {
-        spawnPS = GetComponent<SpawnParticleSystem>();
-        objId = transform.name;
+        spawnPS = transform.parent.GetComponent<SpawnParticleSystem>();
     }
 
     //Snap edge has detected collision
-    public void OnCollision(GameObject parent, GameObject child, Transform snapPosition)
+    public void OnCollision(/*GameObject parent, GameObject child, Transform snapPosition*/ GameObject col)
     {
+        /*
+        //Convert 
         //Set parent of child to this object
         child.transform.SetParent(parent.transform, true);
 
@@ -51,11 +51,86 @@ public class Snappable : MonoBehaviour
                 if (GetComponent<SnappableParent>().isComplete())
                 {
                     spawnPS.Spawn(Color.yellow);
+                    EventManager.OnToyCompleted(gameObject);
                 }
             }
         }
         else
             spawnPS.Spawn(Color.red);
+            
+
+        //Parent this to obj
+
+        transform.SetParent(col.transform);
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, 0f, 0f);
+
+        transform.GetComponent<VRTK.VRTK_InteractableObject>().setPreviousParent(col.transform);
+        Destroy(transform.GetComponent<Rigidbody>());
+
+    */
+
+        //Set rotation
+
+        //Get the direction of the parent object which is equal to the direction of the snapPanel local vector
+
+
+        
+
+
+
+        //Get the forward direction of this 
+    }
+
+    public void SnapRayCast(GameObject snapEdge)
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(snapEdge.transform.position, snapEdge.transform.forward, out hit, 25f, LayerMask.NameToLayer("Toys"), QueryTriggerInteraction.Collide))
+        {
+            if(hit.collider.gameObject.tag.Contains("Toy"))
+            {
+                transform.rotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
+                transform.SetParent(snapEdge.transform);
+                transform.GetComponent<VRTK.VRTK_InteractableObject>().setPreviousParent(snapEdge.transform);
+
+                Destroy(transform.GetComponent<Rigidbody>());
+            }
+        }
+    }
+    public void SnapFixedJoint(GameObject snapObj, GameObject snapEdge, bool isCorrectPart)
+    {
+        //Make child
+        //Transform previousParent = transform.parent;
+        //snapObj.transform.SetParent(transform);
+        //snapObj.transform.GetComponent<VRTK.VRTK_InteractableObject>().setPreviousParent(transform);
+        //
+        ////Remove parent
+        //snapObj.transform.parent = null;
+        //snapObj.transform.GetComponent<VRTK.VRTK_InteractableObject>().setPreviousParent(null);
+
+        //Make connected object
+        FixedJoint fj = snapObj.AddComponent<FixedJoint>();
+        fj.connectedBody = GetComponent<Rigidbody>();
+
+        //Force one hand to stop interacting
+        snapObj.GetComponent<VRTK.VRTK_InteractableObject>().ForceStopInteracting();
+
+        //check is correct part 
+        if(isCorrectPart)
+        {
+            spawnPS.Spawn(Color.green, snapEdge.transform.position);
+
+            //Increment num parts
+            PartCounter partCounter = transform.parent.GetComponent<PartCounter>();
+            if (partCounter != null)
+            {
+                partCounter.IncrementNumParts();
+
+                if (partCounter.IsComplete())
+                {
+                    spawnPS.Spawn(Color.green, partCounter.getMainPart().transform.position);
+                }
+            }
+        }
     }
 
     private void SnapPosition(Vector3 forward, GameObject child)
@@ -68,7 +143,8 @@ public class Snappable : MonoBehaviour
         else if (forward == Vector3.up || forward == -Vector3.up)
         {
             child.transform.localPosition = new Vector3(0f, child.transform.localPosition.y, 0f);
-            //child.transform.localRotation = Quaternion.Euler(child.transform.localRotation.x, 0f, child.transform.localRotation.z);
+            //child.transform.localRotation = Quaternion.Euler(0f, child.transform.localRotation.y, child.transform.localRotation.z);
         }
     }
+
 }

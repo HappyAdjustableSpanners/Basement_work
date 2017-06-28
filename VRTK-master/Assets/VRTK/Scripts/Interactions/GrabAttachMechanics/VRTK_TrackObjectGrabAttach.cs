@@ -104,7 +104,7 @@ namespace VRTK.GrabAttachMechanics
                 {
                     Vector3 angularTarget = angle * axis;
 
-                    Vector3 calculatedAngularVelocity = Vector3.MoveTowards(grabbedObjectRigidBody.angularVelocity, angularTarget, maxDistanceDelta);
+                    Vector3 calculatedAngularVelocity = Vector3.MoveTowards(grabbedObjectRigidBody.angularVelocity, angularTarget, maxDistanceDelta * 100f);
 
                     if (angularVelocityLimit == float.PositiveInfinity || calculatedAngularVelocity.sqrMagnitude < angularVelocityLimit)
                     {

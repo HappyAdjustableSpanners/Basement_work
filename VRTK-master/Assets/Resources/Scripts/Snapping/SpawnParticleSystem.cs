@@ -14,13 +14,12 @@ public class SpawnParticleSystem : MonoBehaviour {
 		
 	}
 
-    public void Spawn(Color color)
+    public void Spawn(Color color, Vector3 pos)
     {
         if (!GetComponent<ParticleSystem>())
         {
-            GameObject ps = Instantiate(Resources.Load<ParticleSystem>("Prefabs/ParticleSystems/CelebrationPS").gameObject);
+            GameObject ps = Instantiate(Resources.Load<ParticleSystem>("Prefabs/ParticleSystems/CelebrationPS").gameObject, pos, Quaternion.identity);
             ps.transform.parent = transform;
-            ps.transform.localPosition = Vector3.zero;
             ps.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             ParticleSystem celebrationParticles = ps.GetComponent<ParticleSystem>();
             celebrationParticles.startColor = color;

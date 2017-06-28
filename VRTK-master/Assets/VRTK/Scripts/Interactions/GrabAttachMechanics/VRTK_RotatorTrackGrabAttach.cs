@@ -31,7 +31,7 @@ namespace VRTK.GrabAttachMechanics
         public override void ProcessFixedUpdate()
         {
             var rotateForce = trackPoint.position - initialAttachPoint.position;
-            grabbedObjectRigidBody.AddForceAtPosition(rotateForce, initialAttachPoint.position, ForceMode.VelocityChange);
+            grabbedObjectRigidBody.AddForceAtPosition(rotateForce * 2, initialAttachPoint.position, ForceMode.VelocityChange);
         }
 
         protected override void SetTrackPointOrientation(ref Transform trackPoint, Transform currentGrabbedObject, Transform controllerPoint)
